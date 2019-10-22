@@ -54,4 +54,14 @@ class LoginController extends Controller
 
         return $result;
     }
+
+    public function logout(Request $request)
+    {
+        auth()->user()->update(['isVerified' => 0]);
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        return $this->loggedOut($request) ?: redirect('/');
+    }
 }

@@ -19,7 +19,7 @@ class LoginTest extends TestCase
         $user = factory(User::class)->create();
 
         $this->actingAs($user);
-        $this->get('/home')->assertRedirect('/');
+        $this->get('/home')->assertRedirect('/verifyOTP');
     }
 
 

@@ -15,21 +15,13 @@ use Illuminate\Support\Facades\Mail;
 |
 */
 
-Route::get('/', function () {
-                $OTP = rand(100000, 999999);
-
-            Cache::put(['OTP' => $OTP], now()->addSeconds(20));
-
-           // $mail = Mail::to('masudrana@test.com')->send(new OTPMail($OTP));
-           // 
-           Mail::to('MasudRana@gmail.com')->send(new OTPMail($OTP));
-
-            return "Hello";
+Route::get('/', function () {         
+    return view('welcome');
 });
 
 Auth::routes();
 
-// Route::get('/verifyOTP', 'VerifyOTPController@showVerifyForm');
+Route::get('/verifyOTP', 'VerifyOTPController@showVerifyForm');
 Route::post('/verifyOTP', 'VerifyOTPController@verify');
 // Route::post('/resend_otp', 'ResendOTPController@resend');
 
