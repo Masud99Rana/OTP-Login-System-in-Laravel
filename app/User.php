@@ -2,10 +2,12 @@
 
 namespace App;
 
+use App\Mail\OTPMail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Mail;
 
 class User extends Authenticatable
 {
@@ -39,7 +41,7 @@ class User extends Authenticatable
     ];
 
     public function OTP(){
-        return Cache::get('OTP');
+        return Cache::get($this->OTPKey());
     }
     public function OTPKey()
     {
@@ -53,9 +55,9 @@ class User extends Authenticatable
         return $OTP;
     }
 
-    // public function sendOTP($via)
-    // {
-    //     $OTP = $this->cacheTheOTP();
-    //     $this->notify(new OTPNotification($via, $OTP));
-    // }
+    public function sendOTP()
+    {
+        $OTP = $this->cacheTheOTP();
+        Mail::to('masudrana@test.com')->send(new OTPMail($OTP));
+    }
 }

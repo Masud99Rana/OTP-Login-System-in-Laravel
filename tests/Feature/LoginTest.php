@@ -2,9 +2,10 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\User;
+use Illuminate\Foundation\Testing\Concerns\withoutExceptionHandling;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 
 class LoginTest extends TestCase
@@ -13,7 +14,8 @@ class LoginTest extends TestCase
     
     /** @test */
     public function after_login_user_can_not_access_home_page_until_verified()
-    {
+    {   
+        
         $user = factory(User::class)->create();
 
         $this->actingAs($user);

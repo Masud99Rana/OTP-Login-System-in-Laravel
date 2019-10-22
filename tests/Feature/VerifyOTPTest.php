@@ -2,11 +2,12 @@
 
 namespace Tests\Feature;
 
+use App\User;
+use Illuminate\Foundation\Testing\Concerns\withExceptionHandling;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
-use App\User;
 use Illuminate\Support\Facades\Cache;
+use Tests\TestCase;
 
 class VerifyOTPTest extends TestCase
 {
@@ -16,15 +17,19 @@ class VerifyOTPTest extends TestCase
     * @test
     */
     public function a_user_can_submit_otp_and_Get_verified()
-    {   
+    {    
+    	$this->withExceptionHandling();
 
-        $otp = rand(100000, 999999);
-        Cache::put(['OTP' =>$otp],now()->addSeconds(20));
-
+    	//create the user
         $user = factory(User::class)->create();
-        $this->actingAs($user);
         
-        $this->post('/verifyOTP', ['OTP' => $otp])->assertStatus(302);
+        //login the user
+        $this->actingAs($user);
+
+        // Cache the otp
+        $OTP = auth()->user()->cacheTheOTP();
+
+        $this->post('/verifyOTP', [auth()->user()->OTPKey() => $OTP])->assertStatus(302);
         $this->assertDatabaseHas('users', ['isVerified' => 1]);
     }
 }

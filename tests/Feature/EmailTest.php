@@ -34,9 +34,10 @@ class EmailTest extends TestCase
     */
     public function an_otp_email_is_not_send_if_credentials_are_incorrect()
     {   
-        // $this->withoutExceptionHandling();
         Mail::fake();
 
+        $this->withExceptionHandling();
+        
         $user = factory(User::class)->create();
 
         $res = $this->post('/login', ['email' => $user->email, 'password' => 'password1234']);
