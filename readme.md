@@ -19,7 +19,7 @@
 -->
 
 # OTP Login System in Laravel
-> **Note:** This repository contains the core code of a EOTP Login System in Laravel using TDD.
+> **Note:** This repository contains the core code of a OTP Login System in Laravel using TDD.
 
 [![Made with love by Masud Rana][madewith-shield]][linkedin-url] 
 [![status][status-shield]][linkedin-url] 
@@ -29,7 +29,7 @@
 [![Gmail][gmail-shield]][gmail-url]
 
 ## About The Project
-A one-time password (OTP), also known as one-time pin or dynamic password, is a password that is valid for only one login session or transaction, on a computer system or other digital device. I have implemented here OTP using TDD in Laravel.
+A one-time password (OTP), also known as one-time pin or dynamic password, is a password that is valid for only one login session or transaction, on a computer system or other digital device. I have implemented here OTP using TDD.
 
 ### Built With
 The major technologies that i have used to build this project.
