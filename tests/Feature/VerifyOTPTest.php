@@ -45,4 +45,32 @@ class VerifyOTPTest extends TestCase
         ->assertStatus(200) // we can write in controller return resposnse(null, 200); just idea
         ->assertSee('Enter OTP');
     }
+
+    /**
+    * @test
+    */
+    public function invalid_otp_returns_error_message()
+    {   
+        //create the user
+        $user = factory(User::class)->create();       
+        //login the user
+        $this->actingAs($user);
+
+        $this->post('/verifyOTP', ['OTP' => 'InvalidOTP'])->assertSessionHasErrors();
+    }
+
+    /**
+    * @test
+    */
+    public function if_no_otp_is_given_then_it_return_with_error()
+    {
+        $this->withExceptionHandling();
+        
+        //create the user
+        $user = factory(User::class)->create();       
+        //login the user
+        $this->actingAs($user);
+
+        $this->post('/verifyOTP', ['OTP' => null])->assertSessionHasErrors(['OTP']);
+    }
 }

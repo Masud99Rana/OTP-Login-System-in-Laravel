@@ -49,7 +49,7 @@ class LoginController extends Controller
         );
 
         if($result){
-            auth()->user()->sendOTP();
+            auth()->user()->sendOTP(request('via'));
         }
 
         return $result;

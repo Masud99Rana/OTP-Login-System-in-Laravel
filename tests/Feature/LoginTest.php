@@ -7,7 +7,6 @@ use Illuminate\Foundation\Testing\Concerns\withoutExceptionHandling;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-
 class LoginTest extends TestCase
 {   
     use RefreshDatabase;
